@@ -7,54 +7,45 @@ The general idea is to use a separate stream for each model you want to serializ
 
 Add the following to your Gemfile and bundle install
 
-```
-gem 'firehose-integration'
-```
+  gem 'firehose-integration'
 
 Create and configure config/initializers/aws.rb
 
-```
-require 'aws-sdk'
+  require 'aws-sdk'
 
-Aws.config.update({
-  region: 'us-east-1',
-  credentials: Aws::Credentials.new('akid', 'secret')
-})
-```
+  Aws.config.update({
+    region: 'us-east-1',
+    credentials: Aws::Credentials.new('akid', 'secret')
+  })
 
 For each model you want to integrate create a kinesis serializer
 
-```
-# apps/kinesis_serializers/dummy_model_kinesis_serializer.rb
-module DummyModelKinesisSerializer
-  extend ActiveSupport::Concern
-
-  included do
-    def to_kinesis
-      prepare_for_redshift [
-        id,
-        updated_at,
-        created_at
-      ]
-    end
-
-    def self.kinesis_stream_name
-      'dummy-stream'
+  # apps/kinesis_serializers/dummy_model_kinesis_serializer.rb
+  module DummyModelKinesisSerializer
+    extend ActiveSupport::Concern
+  
+    included do
+      def to_kinesis
+        prepare_for_redshift [
+          id,
+          updated_at,
+          created_at
+        ]
+      end
+      
+      def self.kinesis_stream_name
+        'dummy-stream'
+      end
     end
   end
-end
-
-```
 
 Add the following line to the model you want to integrate.
 For the DummyModel example here we'd setup a 'dummy-stream' in Firehose.
 
-```
-# app/models/dummy_model.rb
-class DummyModel < ActiveRecord::Base
-  firehose_integratable
-end
-```
+  # app/models/dummy_model.rb
+  class DummyModel < ActiveRecord::Base
+    firehose_integratable
+  end
 
 You will need to make sure you have the streams you're using created in Amazon Firehose.
 
