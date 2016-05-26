@@ -1,3 +1,3 @@
-class StupidModel < ActiveRecord::Base # Inherit from any actual model that doesn't have Kinesis included
+class StupidModel < ActiveRecord::Base
   firehose_integratable
 end
