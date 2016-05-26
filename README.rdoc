@@ -40,7 +40,6 @@ For each model you want to integrate create a kinesis serializer
   end
 
 Add the following line to the model you want to integrate.
-For the DummyModel example here we'd setup a 'dummy-stream' in Firehose.
 
   # app/models/dummy_model.rb
   class DummyModel < ActiveRecord::Base
@@ -48,6 +47,7 @@ For the DummyModel example here we'd setup a 'dummy-stream' in Firehose.
   end
 
 You will need to make sure you have the streams you're using created in Amazon Firehose.
+For the DummyModel example here we'd setup a 'dummy-stream' in Firehose.
 
 = License
 This project rocks and uses MIT-LICENSE.
