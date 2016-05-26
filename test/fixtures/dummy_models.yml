@@ -1,0 +1,3 @@
+one:
+  updated_at: <%= Time.now %>
+  created_at: <%= Time.now %>

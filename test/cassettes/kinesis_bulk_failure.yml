@@ -1,0 +1,55 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://firehose.us-east-1.amazonaws.com/
+    body:
+      encoding: UTF-8
+      string: '{"DeliveryStreamName":"invalid-stream-name","Records":[{"Data":"c29tZSBkYXRhCg=="}]}'
+    headers:
+      Content-Type:
+      - application/x-amz-json-1.1
+      Accept-Encoding:
+      - ''
+      User-Agent:
+      - aws-sdk-ruby2/2.3.8 ruby/2.2.1 x86_64-darwin15
+      X-Amz-Target:
+      - Firehose_20150804.PutRecordBatch
+      X-Amz-Date:
+      - 20160526T204248Z
+      Host:
+      - firehose.us-east-1.amazonaws.com
+      X-Amz-Content-Sha256:
+      - 51d39395cb7e526eb7bac24de83e3012137401a5d77dcaf4308119c1c69a8f33
+      Authorization:
+      - AWS4-HMAC-SHA256 Credential=akid/20160526/us-east-1/firehose/aws4_request,
+        SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date;x-amz-target,
+        Signature=bb4def5cb89830d9f160f15e40b4327f556bd719d7b9cc1c06084bf43e342ef2
+      Content-Length:
+      - '84'
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      X-Amzn-Requestid:
+      - 69cc5bea-2382-11e6-aaa0-171acafcc56d
+      X-Amz-Id-2:
+      - sJghDMvGF8Lt4ULOjnCoI0pj42bU/9gRZ+uLaCTZCDaRcKRyVHnr9GcucTdP8S8fgkWwPsVY3+o8tUzVXoMzHg==
+      Content-Type:
+      - application/x-amz-json-1.1
+      Content-Length:
+      - '117'
+      Date:
+      - Thu, 26 May 2016 20:42:50 GMT
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: '{"__type":"ResourceNotFoundException","message":"Firehose invalid-stream-name
+        not found under account 000111222333."}'
+    http_version:
+  recorded_at: Thu, 26 May 2016 20:42:48 GMT
+recorded_with: VCR 2.9.3
