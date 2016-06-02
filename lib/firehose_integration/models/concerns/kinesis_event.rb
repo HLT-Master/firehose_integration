@@ -6,7 +6,7 @@ module FirehoseIntegration
 
     module ClassMethods
       def firehose_integratable
-        after_commit :send_kinesis_event, unless: Proc.new { |instance| instance.try(:skip_kinesis_event) }
+        after_commit :send_kinesis_event, unless: Proc.new { |instance| instance.try(:skip_kinesis_event) || ENV['SKIP_KINESIS_EVENTS'] == 'true' }
 
         begin
           include "#{self.model_name.name}KinesisSerializer".constantize

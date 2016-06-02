@@ -25,4 +25,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "minitest-spec-rails"
   s.add_development_dependency "minitest-vcr"
   s.add_development_dependency "webmock"
+  s.add_development_dependency "test_after_commit"
 end

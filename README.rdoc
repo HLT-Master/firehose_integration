@@ -133,6 +133,14 @@ to keep in sync when your model is updated.
     end
   end
 
+If you'd like to turn the syncing off for some reason like when running on a staging server, just set the following ENV variable to true:
+
+SKIP_KINESIS_EVENTS=true
+
+= Versions
+
+0.0.2 - Adding ability to turn off job queueing with ENV variable
+0.0.1 - Initial release
 
 = License
 This project rocks and uses MIT-LICENSE.
