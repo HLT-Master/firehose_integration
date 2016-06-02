@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class KinesisEventTest < ActiveSupport::TestCase
+  include ActiveJob::TestHelper
+
   test "should raise exception when to_kinesis is not defined" do
     exception = assert_raises(NoMethodError) { StupidModel.new.to_kinesis}
     assert_match "Model must define instance method to_kinesis", exception.message
@@ -23,5 +25,11 @@ class KinesisEventTest < ActiveSupport::TestCase
 
   test 'should prepare an array for redshift' do
     assert_equal "something|1|", DummyModel.new.prepare_for_redshift(["something",1,nil])
+  end
+
+  test 'should not enqueue when SKIP_KINESIS_EVENTS=true' do
+    ENV['SKIP_KINESIS_EVENTS'] = 'true'
+    d = DummyModel.create
+    assert_no_enqueued_jobs
   end
 end

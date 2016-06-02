@@ -7,6 +7,7 @@ require "rails/test_help"
 require 'vcr'
 require 'minitest-vcr'
 require 'webmock'
+require 'test_after_commit'
 
 # Filter out Minitest backtrace while allowing backtrace from other libraries
 # to be shown.
