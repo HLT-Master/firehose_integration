@@ -55,7 +55,7 @@ module FirehoseIntegration
           '\r' => '\\r',
           '\|' => '&verbar;'
         }.each do |pattern, replacement|
-          output = output.gsub(Regexp.new(pattern), replacement)
+          output = output.gsub(Regexp.new(pattern), replacement).force_encoding("utf-8")
         end
         output
       end

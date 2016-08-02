@@ -29,7 +29,7 @@ class KinesisEventTest < ActiveSupport::TestCase
 
   test 'should not enqueue when SKIP_KINESIS_EVENTS=true' do
     ENV['SKIP_KINESIS_EVENTS'] = 'true'
-    d = DummyModel.create
+    DummyModel.create
     assert_no_enqueued_jobs
   end
 end
