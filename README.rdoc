@@ -139,7 +139,7 @@ SKIP_KINESIS_EVENTS=true
 
 = Versions
 
-0.0.3 - Forcing UTF-8 encoding for strings
+0.0.4 - Forcing UTF-8 encoding for strings
 0.0.2 - Adding ability to turn off job queueing with ENV variable
 0.0.1 - Initial release
 
