@@ -65,8 +65,12 @@ module FirehoseIntegration
 
 
       def send_kinesis_event
-        KinesisJob.perform_later(self.class.kinesis_stream_name, self.to_kinesis)
-        self.kinesis_extra_serialization if self.methods.include? :kinesis_extra_serialization
+        begin
+          KinesisJob.perform_later(self.class.kinesis_stream_name, self.to_kinesis)
+          self.kinesis_extra_serialization if self.methods.include? :kinesis_extra_serialization
+        rescue
+          Rails.logger.error("Failed to queue #{self.class.kinesis_stream_name} data: #{self.to_kinesis}")
+        end
       end
     end
   end
