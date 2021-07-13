@@ -17,6 +17,9 @@ module FirehoseIntegration
       def kinesis_stream_name
         raise(NoMethodError, "Model must define class method kinesis_stream_name")
       end
+      def skip_truncate
+        false
+      end
     end
 
     included do
@@ -26,7 +29,7 @@ module FirehoseIntegration
       end
 
       def prepare_for_redshift(field)
-        if field.present?
+        if field.present? && !self.class.skip_truncate
           if field.is_a? Array
             output = []
             field.each do |f|
