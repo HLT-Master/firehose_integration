@@ -65,7 +65,10 @@ module FirehoseIntegration
 
 
       def send_kinesis_event
-        KinesisJob.perform_later(self.class.kinesis_stream_name, self.to_kinesis)
+        stream_names = Array.wrap(self.class.kinesis_stream_name)
+        stream_names.each do |stream_name|
+          KinesisJob.perform_later(stream_name, self.to_kinesis)
+        end
         self.kinesis_extra_serialization if self.methods.include? :kinesis_extra_serialization
       end
     end
