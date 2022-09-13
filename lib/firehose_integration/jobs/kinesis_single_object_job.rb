@@ -7,16 +7,19 @@ module FirehoseIntegration
       results = []
       ids.each do |id|
         object = class_name.constantize.find(id)
-        stream = object.class.kinesis_stream_name
         data = object.to_kinesis
 
-        params = {
-          delivery_stream_name: stream,
-          record: {
-            data: "#{data}\n"
+        streams = Array.wrap(object.class.kinesis_stream_name)
+
+        streams.each do |stream|
+          params= {
+            delivery_stream_name: stream,
+            record: {
+              data: "#{data}\n"
+            }
           }
-        }
-        results << client.put_record(params)
+          results << client.put_record(params)
+        end
       end
       results
     end
