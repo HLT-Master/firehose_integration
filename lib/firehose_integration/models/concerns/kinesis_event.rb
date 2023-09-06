@@ -11,6 +11,7 @@ module FirehoseIntegration
         begin
           include "#{self.model_name.name}KinesisSerializer".constantize
         rescue
+          puts "NOT FOUND"
         end
       end
 
@@ -29,11 +30,15 @@ module FirehoseIntegration
       end
 
       def prepare_for_redshift(field)
-        if field.present? && !self.class.skip_truncate
+        if field.present?
           if field.is_a? Array
             output = []
             field.each do |f|
-              output << massage_data_for_redshift(f)
+              if self.class.skip_truncate
+                output << f
+              else
+                output << massage_data_for_redshift(f)
+              end
             end
             return output.join("|")
           end
